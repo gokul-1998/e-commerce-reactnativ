@@ -21,5 +21,5 @@
     - `yarn add @react-navigation/bottom-tabs` 
 
 - @react-native-async-storage/async-storage";
-    - this can be  installed by running `yarn add @react-native-async-storage/async-storage`
+    - this can be  installed by running ``yarn add @react-native-async-storage/async-storage``
     

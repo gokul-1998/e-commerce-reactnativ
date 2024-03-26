@@ -73,6 +73,7 @@ const sendVerificationEmail= async(email,verificationToken)=>{
 
 app.post("/register",async(req,res)=>{
     try{
+        console.log("registering user",req.body);
         const {name,email,password}=req.body;
         const existingUser = await User.findOne({email});
         if (existingUser){
