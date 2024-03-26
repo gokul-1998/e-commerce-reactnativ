@@ -45,7 +45,7 @@ const LoginScreen = () => {
 
                         <TextInput
                             value={password}
-                            onChange={(text) => setPassword(text)}
+                            onChangeText={(text) => setPassword(text)}
                             secureTextEntry={true}
                             style={{ color: "gray", marginVertical: 10, width: 300, fontSize: password ? 16 : 16 }} placeholder='Enter your  password' />
                     </View>

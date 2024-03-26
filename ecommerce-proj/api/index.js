@@ -26,10 +26,6 @@ mongoose.connect("mongodb://localhost:27017/ecommerce", { useNewUrlParser: true}
     console.log("DB not connected", err)
 })
 
-app.listen(port, () => {
-    console.log("Server is running on port", port)
-}
-)
 
 
 const User= require("./models/user");
@@ -61,7 +57,7 @@ const sendVerificationEmail= async(email,verificationToken)=>{
     // send  the email
     try{
 
-        await  transporter.sendMail(mainOptions)
+        await  transporter.sendMail(mailOptions)
     }
     catch(error){
         console.log("Error sending verification email",error)
@@ -69,7 +65,16 @@ const sendVerificationEmail= async(email,verificationToken)=>{
 
 }
 
+
+app.get("/", (req, res) => {
+    res.send("Hello World")
+}
+)
+
+
 // endpoint to register in the  app sad 
+
+
 
 app.post("/register",async(req,res)=>{
     try{
@@ -77,10 +82,12 @@ app.post("/register",async(req,res)=>{
         const {name,email,password}=req.body;
         const existingUser = await User.findOne({email});
         if (existingUser){
-            return res.staturs(400).json({
+            console.log("email already registered")
+            return res.status(400).json({
                 message:"Email already Registered"
             });
         }
+        console.log("creating new user")
         const newUser = new User({name,email,password});
 
         newUser.verificationToken=crypto.randomBytes(20).toString("hex");
@@ -93,7 +100,7 @@ app.post("/register",async(req,res)=>{
         sendVerificationEmail(newUser,email,newUser.verificationToken)
 
 
-
+        console.log("email sent")
         //  check if email is already registered
     }
     catch(error){
@@ -124,3 +131,13 @@ app.get('/verify/:token',async(req,res)=>{
         res.status(500).json({message:"Rmail Verification failed"});
     }
 })
+
+
+
+
+app.listen(port, () => {
+    console.log("Server is running on port", port)
+}
+)
+//  to make this accessible to my phone  i need to change the localhost to my ip address
+//  or make it run on all ip address by changing the localhost to

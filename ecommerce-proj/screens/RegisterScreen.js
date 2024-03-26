@@ -25,7 +25,7 @@ const RegisterScreen = () => {
 
         // send a post request to the  backend  API
 
-        axios.post("http://localhost:8000/register", user).then((response) => {
+        axios.post("http://192.168.21.57:8000/register", user).then((response) => {
             console.log(response.data);
             // navigation.navigate("Home");
             Alert.alert("Registration successful", "You have been registered successfully, please verify your email to login");
@@ -64,7 +64,7 @@ const RegisterScreen = () => {
 
                         <TextInput
                             value={name}
-                            onChange={(text) => setName(text)}
+                            onChangeText={(text) => setName(text)}
 
                             style={{ color: "gray", marginVertical: 10, width: 300, fontSize: name ? 16 : 16 }} placeholder='Enter your  name' />
                     </View>
@@ -83,7 +83,7 @@ const RegisterScreen = () => {
 
                         <TextInput
                             value={password}
-                            onChange={(text) => setPassword(text)}
+                            onChangeText={(text) => setPassword(text)}
                             secureTextEntry={true}
                             style={{ color: "gray", marginVertical: 10, width: 300, fontSize: password ? 16 : 16 }} placeholder='Enter your  password' />
                     </View>
