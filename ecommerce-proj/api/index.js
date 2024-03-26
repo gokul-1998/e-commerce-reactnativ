@@ -16,6 +16,9 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+
+const baseurl="http://192.168.21.57:8000/"
+
 const jwt = require("jsonwebtoken")
 
 
@@ -50,7 +53,7 @@ const sendVerificationEmail= async(email,verificationToken)=>{
         from:"amazon.com",
         to:email,
         subject:"Email verification",
-        text:`Please click the following link to verify your email : http://localhost:8000/cerify/${verificationToken}`
+        text:`Please click the following link to verify your email : ${baseurl}verify/${verificationToken}`
     };
 
 
@@ -97,7 +100,7 @@ app.post("/register",async(req,res)=>{
 
 
         // send verification email to the user
-        sendVerificationEmail(newUser,email,newUser.verificationToken)
+        sendVerificationEmail(newUser.email,newUser.verificationToken)
 
 
         console.log("email sent")
