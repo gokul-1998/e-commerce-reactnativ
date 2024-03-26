@@ -34,6 +34,12 @@ mongoose.connect("mongodb://localhost:27017/ecommerce", { useNewUrlParser: true}
 const User= require("./models/user");
 const Order=require("./models/order");
 
+const generateSecretKey=()=>{
+    return crypto.randomBytes(20).toString("hex");
+
+}
+
+const  secretKey=generateSecretKey();
 
 // function to send  Verification email  to the user
 
@@ -139,9 +145,11 @@ app.get('/verify/:token',async(req,res)=>{
 
 // endpoint  to login the  user
 app.post("/login",async(req,res)=>{
+    console.log("inside login")
     try{
         const {email,password}=req.body;
         const user=await User.findOne({email});
+        console.log("user",user)
         if (!user){
             return res.status(404).json({message:"User not found"})
         }
@@ -152,8 +160,8 @@ app.post("/login",async(req,res)=>{
             return res.status(400).json({message:"Invalid password"})
         }
         const token=jwt.sign({userId:user._id},
-        
-        process.env.JWT_SECRET); 
+            secretKey,
+            {expiresIn:"1h"});
         res.status(200).json({token})
     }
     catch(error){

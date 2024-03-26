@@ -23,3 +23,6 @@
 - @react-native-async-storage/async-storage";
     - this can be  installed by running ``yarn add @react-native-async-storage/async-storage``
     
+
+- `npx expo install @react-native-async-storage/async-storage`
+    - this is used to store data in the local storage of the device 
