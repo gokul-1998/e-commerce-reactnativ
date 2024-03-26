@@ -102,6 +102,8 @@ app.post("/register",async(req,res)=>{
         // send verification email to the user
         sendVerificationEmail(newUser.email,newUser.verificationToken)
 
+        res.status(201).json({message:"User registered successfully. Please verify your email to login"})
+
 
         console.log("email sent")
         //  check if email is already registered
@@ -135,6 +137,30 @@ app.get('/verify/:token',async(req,res)=>{
     }
 })
 
+// endpoint  to login the  user
+app.post("/login",async(req,res)=>{
+    try{
+        const {email,password}=req.body;
+        const user=await User.findOne({email});
+        if (!user){
+            return res.status(404).json({message:"User not found"})
+        }
+        if (!user.verified){
+            return res.status(400).json({message:"Email not verified"})
+        }
+        if (user.password!==password){
+            return res.status(400).json({message:"Invalid password"})
+        }
+        const token=jwt.sign({userId:user._id},
+        
+        process.env.JWT_SECRET); 
+        res.status(200).json({token})
+    }
+    catch(error){
+        res.status(500).json({message:"Login failed"})
+    }
+}
+)
 
 
 
