@@ -12,6 +12,7 @@ import { SliderBox } from 'react-native-image-slider-box';
 
 import ProductItem from '../components/ProductItem';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
   const list = [
@@ -186,6 +187,7 @@ const HomeScreen = () => {
       size: "8GB RAM, 128GB Storage",
     },
   ];
+  const navigation=useNavigation()
   const [products, setProducts] = useState([]);
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState("jewelery");
@@ -342,7 +344,19 @@ const HomeScreen = () => {
           horizontal showsHorizontalScrollIndicator={false}
         >
           {offers.map((item, index) => (
-            <Pressable style={{
+            <Pressable 
+            onPress={()=> navigation.navigate("Info",{ id:item.id,
+            title:item.title,
+            price:item?.price,
+            carouselImages:item.carouselImages,
+            color:item?.color,
+            size:item?.size,
+            oldPrice:item?.oldPrice,
+            item:item,
+
+            })
+          }
+            style={{
               marginVertical: 10,
               alignItems: "center",
               justifyContent: "center",
