@@ -416,8 +416,10 @@ const HomeScreen = () => {
 
 
         <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
-          {products?.map((item, index) => (
+          {products?.filter((item)=>item.category===category)
+          .map((item, index) => (
             <ProductItem item={item} key={index} />
+          
           ))}
         </View>
 
