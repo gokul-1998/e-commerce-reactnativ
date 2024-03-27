@@ -86,21 +86,41 @@ const HomeScreen = () => {
                     <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
 
                 </View>
+                
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {list.map((item, index) => (
+              <Pressable
+                key={index}
+                style={{
+                  margin: 10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  style={{ width: 50, height: 50, resizeMode: "contain" }}
+                  source={{ uri: item.image }}
+                />
+
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 12,
+                    fontWeight: "500",
+                    marginTop: 5,
+                  }}
+                >
+                  {item?.name}
+                </Text>
+              </Pressable>
+            ))}
+          </ScrollView>
+
+                
 
             </ScrollView>
 
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                    {list.map((item,index)=>{
-                        <Pressable>
-                            
-                            <Image style={{width:50,height:50,resizeMode:"contain"}}  source={{uri:item.image}} />
-
-                            <Text style={{textAlign:"center",fontSize:12,fontWeight:"500",marginTop:5}}>{item?.name} </Text>
-
-                        </Pressable>
-                    }) }
-            </ScrollView>
-
+            
 
                 <Text>fajjsdfaf</Text>
         </SafeAreaView>
