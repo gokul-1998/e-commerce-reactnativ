@@ -1,12 +1,16 @@
 import { Image, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AntDesign } from '@expo/vector-icons';
 
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+//  to import axios
+import axios from 'axios';
 import  {SliderBox}  from  'react-native-image-slider-box';
+
+import ProductItem from '../components/ProductItem';
 
 const HomeScreen = () => {
     const list = [
@@ -182,6 +186,28 @@ const HomeScreen = () => {
         },
       ];
 
+      const [products, setProducts] = useState([]);
+      useEffect(() => {
+        const fetchData=async()=>{
+          try{
+            
+            const  response = await axios.get("https://fakestoreapi.com/products");
+            setProducts(response.data);
+
+          }catch(error){
+            console.log("error",error);
+          }
+        
+
+        }
+
+        fetchData();
+
+
+      }, []);
+
+      console.log("products",products);
+
     return (
         <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? 40 : 0, flex: 1, backgroundColor: "white" }}>
             <ScrollView>
@@ -330,11 +356,21 @@ const HomeScreen = () => {
 
             </ScrollView>
 
+            <Text style={{height:1,borderColor:"#D0D0D0",borderWidth:2,
+            marginTop:15
+          }}></Text>
+
+          <View style={{flexDirection:"row",alignItems:"center",flexWrap:"wrap"}}>
+            {products?.map((item, index) => (
+              <ProductItem item={item} key={index}/>
+            ))}
+          </View>
+          
+
             </ScrollView>
 
             
 
-                <Text>fajjsdfaf</Text>
         </SafeAreaView>
     )
 }
