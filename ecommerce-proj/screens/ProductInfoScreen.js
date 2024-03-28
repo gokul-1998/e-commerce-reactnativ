@@ -51,8 +51,30 @@ const ProductInfoScreen = () => {
         source={{ uri: item }}
         key={index}
       >
-        <View>
-          <Text>abcd</Text>
+        <View
+        style={{
+          padding:20,
+          flexDirection:"row",
+          alignItems:"center",
+          justifyContent:"space-between"
+        }}
+        >
+        <View style={{width:40,height:40,borderRadius:20,
+        backgroundColor:'#C60C30',
+        justifyContent:"center",
+        alignItems:"center",
+        flexDirection:"row"
+
+        }}>
+          <Text
+            style={{color:"white",
+            textAlign:"center",
+            fontWeight:"600",
+            fontSize:12
+
+          }}
+          >28% off</Text>
+        </View>
         </View>
       </ImageBackground>
     );
