@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 
-const baseurl="http://192.168.21.57:8000/"
+const baseurl="http://192.168.229.57:8000/"
 
 const jwt = require("jsonwebtoken")
 

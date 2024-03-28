@@ -11,7 +11,7 @@ import { UserContext } from './UserContext';
 
 // to use axios base url
 
-axios.defaults.baseURL = 'http://192.168.21.57:8000';
+axios.defaults.baseURL = 'http://192.168.229.57:8000';
 
 export default function App() {
   return (

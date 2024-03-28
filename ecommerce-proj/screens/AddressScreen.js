@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, Pressable } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, Alert } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserType } from '../UserContext';
 
 import jwtDecode from 'jwt-decode';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 const AddressScreen = () => {
+    const navigation = useNavigation();
     const [name, setName] = useState("");
     const [mobileNo, setMobileNo] = useState("");
     const [houseNo, setHouseNo] = useState("");
@@ -17,11 +20,8 @@ const AddressScreen = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                console.log("inside fetch user");
                 const token = await AsyncStorage.getItem("authToken");
-                console.log(token);
-                const decodedToken=jwtDecode(token);                              console.log(decodedToken);
-                console.log("after decode");
+                const decodedToken=jwtDecode(token);                              
                 const userId = decodedToken.userId;
                 setUserId(userId);
             } catch (error) {
@@ -33,6 +33,34 @@ const AddressScreen = () => {
     console.log(userId);
 
     const handleAddAddress=()=>{
+        const  address={
+            name,
+            mobileNo,
+            houseNo,
+            street,
+            landmark,
+            postalCode
+        }
+        axios.post('/addresses',{userId,address}).then((response)=>{
+            Alert.alert('success',"Address added successfully");
+            console.log(response.data);
+            setName("");
+            setMobileNo("");
+            setHouseNo("");
+            setStreet("");
+            setLandmark("");
+            setPostalCode("");
+            setTimeout(() => {
+                navigation.goBack();
+            }
+            , 500);
+        }
+        ).catch((error)=>{
+            Alert.alert('Error',"An error occured while adding address");
+            console.error(error);
+        }
+        )
+
 
     }
 
