@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import axios from 'axios';
+import { ModalPortal } from 'react-native-modals';
 
 // to use axios base url
 
@@ -17,6 +18,7 @@ export default function App() {
     <Provider store={store}>
 
     <StackNavigator />
+    <ModalPortal/>
     </Provider>
     </>
   );

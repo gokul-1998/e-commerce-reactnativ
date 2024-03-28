@@ -14,6 +14,7 @@ import ProductItem from '../components/ProductItem';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import { BottomModal, ModalContent, SlideAnimation } from 'react-native-modals';
 
 const HomeScreen = () => {
   const list = [
@@ -223,6 +224,8 @@ const HomeScreen = () => {
   }, []);
 
   const cart = useSelector((state) => state.cart.cart);
+  const [modalVisible, setModalVisible] = useState(false);
+
   console.log(cart)
   console.log("aaaaaaaaaaaaaaaaaa")
 
@@ -230,142 +233,105 @@ const HomeScreen = () => {
   // console.log("products", products);
 
   return (
-    <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? 40 : 0, flex: 1, backgroundColor: "white" }}>
-      <ScrollView>
-        <View style={{
-          backgroundColor: "#00CED1",
-          flexDirection: "row",
-          alignItems: "center",
-          padding: 10,
-
-        }}>
-          <Pressable style={{
+    <>
+      <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? 40 : 0, flex: 1, backgroundColor: "white" }}>
+        <ScrollView>
+          <View style={{
+            backgroundColor: "#00CED1",
             flexDirection: "row",
             alignItems: "center",
-            marginHorizontal: 7,
-            gap: 10,
-            backgroundColor: "white",
-            borderRadius: 5,
-            height: 38,
-            flex: 1,
+            padding: 10,
+
           }}>
-            <AntDesign
-              style={{ paddingLeft: 10 }}
-              name="search1" size={24} color="black" />
-            <TextInput placeholder="Search for products" />
+            <Pressable style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginHorizontal: 7,
+              gap: 10,
+              backgroundColor: "white",
+              borderRadius: 5,
+              height: 38,
+              flex: 1,
+            }}>
+              <AntDesign
+                style={{ paddingLeft: 10 }}
+                name="search1" size={24} color="black" />
+              <TextInput placeholder="Search for products" />
 
 
-          </Pressable>
-          <Feather name="mic" size={24} color="black" />
-        </View>
+            </Pressable>
+            <Feather name="mic" size={24} color="black" />
+          </View>
 
-        <View style={{ flexDirection: "row", alignItems: "center", gap: 5, padding: 10, backgroundColor: "#AFEEEE" }}>
-          <Ionicons name="location-outline" size={24} color="black" />
-          <Pressable>
-            <Text style={{ fontSize: 13, fontWeight: "500" }}>
-              Deliver  to  Gokul -  Bangalore 560054
-            </Text>
-          </Pressable>
+          <Pressable
+            onPress={
 
-          <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
+              () => setModalVisible(!modalVisible)
+            }
 
-        </View>
-
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {list.map((item, index) => (
+            style={{ flexDirection: "row", alignItems: "center", gap: 5, padding: 10, backgroundColor: "#AFEEEE" }}>
+            <Ionicons name="location-outline" size={24} color="black" />
             <Pressable
-              key={index}
-              style={{
-                margin: 10,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Image
-                style={{ width: 50, height: 50, resizeMode: "contain" }}
-                source={{ uri: item.image }}
-              />
+            onPress={
 
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 12,
-                  fontWeight: "500",
-                  marginTop: 5,
-                }}
-              >
-                {item?.name}
+              () => setModalVisible(!modalVisible)
+            }
+            >
+              <Text style={{ fontSize: 13, fontWeight: "500" }}>
+                Deliver  to  Gokul -  Bangalore 560054
               </Text>
             </Pressable>
-          ))}
-        </ScrollView>
+
+            <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
+
+          </Pressable>
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {list.map((item, index) => (
+              <Pressable
+                key={index}
+                style={{
+                  margin: 10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  style={{ width: 50, height: 50, resizeMode: "contain" }}
+                  source={{ uri: item.image }}
+                />
+
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 12,
+                    fontWeight: "500",
+                    marginTop: 5,
+                  }}
+                >
+                  {item?.name}
+                </Text>
+              </Pressable>
+            ))}
+          </ScrollView>
 
 
-        <SliderBox images={images} autoPlay circleloop dotColor={"#13274F"} inactiveDotColor="#90A4AE"
-          imageComponentStyle={{ width: '100%' }}
-        />
+          <SliderBox images={images} autoPlay circleloop dotColor={"#13274F"} inactiveDotColor="#90A4AE"
+            imageComponentStyle={{ width: '100%' }}
+          />
 
-        <Text
-          style={{
-            padding: 10,
-            fontSize: 18,
-            fontWeight: "bold"
-          }}
-        >Trending Deals  of the Week</Text>
+          <Text
+            style={{
+              padding: 10,
+              fontSize: 18,
+              fontWeight: "bold"
+            }}
+          >Trending Deals  of the Week</Text>
 
-        <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
-          {deals.map((item, index) => (
-            <Pressable
-              onPress={() => navigation.navigate("Info", {
-                id: item.id,
-                title: item.title,
-                price: item?.price,
-                carouselImages: item.carouselImages,
-                color: item?.color,
-                size: item?.size,
-                oldPrice: item?.oldPrice,
-                item: item,
-
-              })
-              }
-              style={{
-                marginVertical: 10, flexDirection: "row",
-                alignItems: "center"
-              }}>
-              <Image source={{ uri: item.image }} style={{
-                width: 180, height: 180,
-                resizeMode: "contain"
-              }} />
-
-            </Pressable>
-
-          ))}
-
-
-        </View>
-
-        <Text style={{
-          height: 1, borderColor: "#D0D0D0", borderWidth: 2,
-          marginTop: 15
-        }}></Text>
-        <Text
-          style={{
-            padding: 10,
-            fontSize: 18,
-            fontWeight: "bold"
-          }}
-        >
-          Today's Deals
-        </Text>
-
-
-        <ScrollView
-          horizontal showsHorizontalScrollIndicator={false}
-        >
-          {offers.map((item, index) => (
-            <Pressable
-              onPress={() =>
-                navigation.navigate("Info", {
+          <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
+            {deals.map((item, index) => (
+              <Pressable
+                onPress={() => navigation.navigate("Info", {
                   id: item.id,
                   title: item.title,
                   price: item?.price,
@@ -376,94 +342,168 @@ const HomeScreen = () => {
                   item: item,
 
                 })
-              }
+                }
+                style={{
+                  marginVertical: 10, flexDirection: "row",
+                  alignItems: "center"
+                }}>
+                <Image source={{ uri: item.image }} style={{
+                  width: 180, height: 180,
+                  resizeMode: "contain"
+                }} />
+
+              </Pressable>
+
+            ))}
+
+
+          </View>
+
+          <Text style={{
+            height: 1, borderColor: "#D0D0D0", borderWidth: 2,
+            marginTop: 15
+          }}></Text>
+          <Text
+            style={{
+              padding: 10,
+              fontSize: 18,
+              fontWeight: "bold"
+            }}
+          >
+            Today's Deals
+          </Text>
+
+
+          <ScrollView
+            horizontal showsHorizontalScrollIndicator={false}
+          >
+            {offers.map((item, index) => (
+              <Pressable
+                onPress={() =>
+                  navigation.navigate("Info", {
+                    id: item.id,
+                    title: item.title,
+                    price: item?.price,
+                    carouselImages: item.carouselImages,
+                    color: item?.color,
+                    size: item?.size,
+                    oldPrice: item?.oldPrice,
+                    item: item,
+
+                  })
+                }
+                style={{
+                  marginVertical: 10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}>
+                <Image source={{ uri: item?.image }} style={{
+                  width: 150, height: 150,
+                  resizeMode: "contain"
+                }} />
+
+                <View style={{
+                  backgroundColor: "#E31837",
+                  paddingVertical: 5,
+                  width: 130,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 10,
+                  borderRadius: 4
+                }}>
+
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: "white",
+                      fontSize: 13,
+                      fontWeight: "bold"
+                    }}
+                  >Upto {item?.offer}  </Text>
+
+                </View>
+
+              </Pressable>
+
+            ))}
+
+          </ScrollView>
+
+          <Text style={{
+            height: 1, borderColor: "#D0D0D0", borderWidth: 2,
+            marginTop: 15
+          }} />
+
+          <View
+            style={{
+              marginHorizontal: 10,
+              marginTop: 20,
+              width: "45%",
+              marginBottom: open ? 50 : 15,
+            }}
+          >
+            <DropDownPicker
               style={{
-                marginVertical: 10,
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <Image source={{ uri: item?.image }} style={{
-                width: 150, height: 150,
-                resizeMode: "contain"
-              }} />
+                borderColor: "#B7B7B7",
+                height: 30,
+                marginBottom: open ? 120 : 15,
+              }}
+              open={open}
+              value={category} //genderValue
+              items={items}
+              setOpen={setOpen}
+              setValue={setCategory}
+              setItems={setItems}
+              placeholder="choose category"
+              placeholderStyle={styles.placeholderStyles}
+              onOpen={onGenderOpen}
+              // onChangeValue={onChange}
+              zIndex={3000}
+              zIndexInverse={1000}
+            />
+          </View>
 
-              <View style={{
-                backgroundColor: "#E31837",
-                paddingVertical: 5,
-                width: 130,
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-                borderRadius: 4
-              }}>
 
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: "white",
-                    fontSize: 13,
-                    fontWeight: "bold"
-                  }}
-                >Upto {item?.offer}  </Text>
 
-              </View>
+          <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
+            {products?.filter((item) => item.category === category)
+              .map((item, index) => (
+                <ProductItem item={item} key={index} />
 
-            </Pressable>
+              ))}
+          </View>
 
-          ))}
 
         </ScrollView>
 
-        <Text style={{
-          height: 1, borderColor: "#D0D0D0", borderWidth: 2,
-          marginTop: 15
-        }} />
-
-        <View
-          style={{
-            marginHorizontal: 10,
-            marginTop: 20,
-            width: "45%",
-            marginBottom: open ? 50 : 15,
-          }}
-        >
-          <DropDownPicker
-            style={{
-              borderColor: "#B7B7B7",
-              height: 30,
-              marginBottom: open ? 120 : 15,
-            }}
-            open={open}
-            value={category} //genderValue
-            items={items}
-            setOpen={setOpen}
-            setValue={setCategory}
-            setItems={setItems}
-            placeholder="choose category"
-            placeholderStyle={styles.placeholderStyles}
-            onOpen={onGenderOpen}
-            // onChangeValue={onChange}
-            zIndex={3000}
-            zIndexInverse={1000}
-          />
-        </View>
 
 
+      </SafeAreaView>
 
-        <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
-          {products?.filter((item) => item.category === category)
-            .map((item, index) => (
-              <ProductItem item={item} key={index} />
+      <BottomModal
+        onBackdropPress={() => setModalVisible(!modalVisible)}
+        swipeDirection={["up", 'down']}
+        swipeThreshold={200}
+        modalAnimation={new SlideAnimation({
+          slideFrom: 'bottom'
+        })}
+        onHardwareBackPress={() => setModalVisible(!modalVisible)}
 
-            ))}
-        </View>
+        visible={modalVisible}
+        onTouchOutside={() => setModalVisible(!modalVisible)}
+      >
+        <ModalContent style={{
+          width: '100%',
+          height: 400
+        }}>
+          <View>
+            <Text>Choose  your location </Text>
+          </View>
+        </ModalContent>
 
+      </BottomModal>
+    </>
 
-      </ScrollView>
-
-
-
-    </SafeAreaView>
   )
 }
 
