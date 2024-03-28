@@ -188,7 +188,7 @@ const HomeScreen = () => {
       size: "8GB RAM, 128GB Storage",
     },
   ];
-  const navigation=useNavigation()
+  const navigation = useNavigation()
   const [products, setProducts] = useState([]);
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState("jewelery");
@@ -218,11 +218,11 @@ const HomeScreen = () => {
 
 
   }, []);
-  const onGenderOpen=useCallback(()=>{
+  const onGenderOpen = useCallback(() => {
     setCompanyOpen(false);
-  },[]);
+  }, []);
 
-  const cart=useSelector((state)=>state.cart.cart);
+  const cart = useSelector((state) => state.cart.cart);
   console.log(cart)
   console.log("aaaaaaaaaaaaaaaaaa")
 
@@ -315,10 +315,23 @@ const HomeScreen = () => {
 
         <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
           {deals.map((item, index) => (
-            <Pressable style={{
-              marginVertical: 10, flexDirection: "row",
-              alignItems: "center"
-            }}>
+            <Pressable
+              onPress={() => navigation.navigate("Info", {
+                id: item.id,
+                title: item.title,
+                price: item?.price,
+                carouselImages: item.carouselImages,
+                color: item?.color,
+                size: item?.size,
+                oldPrice: item?.oldPrice,
+                item: item,
+
+              })
+              }
+              style={{
+                marginVertical: 10, flexDirection: "row",
+                alignItems: "center"
+              }}>
               <Image source={{ uri: item.image }} style={{
                 width: 180, height: 180,
                 resizeMode: "contain"
@@ -350,23 +363,25 @@ const HomeScreen = () => {
           horizontal showsHorizontalScrollIndicator={false}
         >
           {offers.map((item, index) => (
-            <Pressable 
-            onPress={()=> navigation.navigate("Info",{ id:item.id,
-            title:item.title,
-            price:item?.price,
-            carouselImages:item.carouselImages,
-            color:item?.color,
-            size:item?.size,
-            oldPrice:item?.oldPrice,
-            item:item, 
+            <Pressable
+              onPress={() =>
+                navigation.navigate("Info", {
+                  id: item.id,
+                  title: item.title,
+                  price: item?.price,
+                  carouselImages: item.carouselImages,
+                  color: item?.color,
+                  size: item?.size,
+                  oldPrice: item?.oldPrice,
+                  item: item,
 
-            })
-          }
-            style={{
-              marginVertical: 10,
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
+                })
+              }
+              style={{
+                marginVertical: 10,
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
               <Image source={{ uri: item?.image }} style={{
                 width: 150, height: 150,
                 resizeMode: "contain"
@@ -402,45 +417,45 @@ const HomeScreen = () => {
         <Text style={{
           height: 1, borderColor: "#D0D0D0", borderWidth: 2,
           marginTop: 15
-        }}/>
+        }} />
 
-<View
+        <View
+          style={{
+            marginHorizontal: 10,
+            marginTop: 20,
+            width: "45%",
+            marginBottom: open ? 50 : 15,
+          }}
+        >
+          <DropDownPicker
             style={{
-              marginHorizontal: 10,
-              marginTop: 20,
-              width: "45%",
-              marginBottom: open ? 50 : 15,
+              borderColor: "#B7B7B7",
+              height: 30,
+              marginBottom: open ? 120 : 15,
             }}
-          >
-            <DropDownPicker
-              style={{
-                borderColor: "#B7B7B7",
-                height: 30,
-                marginBottom: open ? 120 : 15,
-              }}
-              open={open}
-              value={category} //genderValue
-              items={items}
-              setOpen={setOpen}
-              setValue={setCategory}
-              setItems={setItems}
-              placeholder="choose category"
-              placeholderStyle={styles.placeholderStyles}
-              onOpen={onGenderOpen}
-              // onChangeValue={onChange}
-              zIndex={3000}
-              zIndexInverse={1000}
-            />
-          </View> 
+            open={open}
+            value={category} //genderValue
+            items={items}
+            setOpen={setOpen}
+            setValue={setCategory}
+            setItems={setItems}
+            placeholder="choose category"
+            placeholderStyle={styles.placeholderStyles}
+            onOpen={onGenderOpen}
+            // onChangeValue={onChange}
+            zIndex={3000}
+            zIndexInverse={1000}
+          />
+        </View>
 
 
 
         <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
-          {products?.filter((item)=>item.category===category)
-          .map((item, index) => (
-            <ProductItem item={item} key={index} />
-          
-          ))}
+          {products?.filter((item) => item.category === category)
+            .map((item, index) => (
+              <ProductItem item={item} key={index} />
+
+            ))}
         </View>
 
 
