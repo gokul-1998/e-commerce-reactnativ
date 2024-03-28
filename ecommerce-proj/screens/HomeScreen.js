@@ -352,7 +352,7 @@ const HomeScreen = () => {
             color:item?.color,
             size:item?.size,
             oldPrice:item?.oldPrice,
-            item:item,
+            item:item, 
 
             })
           }
