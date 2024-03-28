@@ -40,6 +40,8 @@ const ProductInfoScreen = () => {
           </Pressable>
           <Feather name="mic" size={24} color="black" />
         </View>
+        
+          
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {route.params.carouselImages.map((item,index)=>{
@@ -48,6 +50,7 @@ const ProductInfoScreen = () => {
                 source={{uri: item}}   key={index}>
 
                     <View>
+                      <Text>abcd</Text>
                     </View>
                 </ImageBackground>
             })}
