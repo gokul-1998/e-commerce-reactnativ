@@ -15,6 +15,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { BottomModal, ModalContent, SlideAnimation } from 'react-native-modals';
+import { Entypo } from '@expo/vector-icons';
 
 const HomeScreen = () => {
   const list = [
@@ -272,10 +273,10 @@ const HomeScreen = () => {
             style={{ flexDirection: "row", alignItems: "center", gap: 5, padding: 10, backgroundColor: "#AFEEEE" }}>
             <Ionicons name="location-outline" size={24} color="black" />
             <Pressable
-            onPress={
+              onPress={
 
-              () => setModalVisible(!modalVisible)
-            }
+                () => setModalVisible(!modalVisible)
+              }
             >
               <Text style={{ fontSize: 13, fontWeight: "500" }}>
                 Deliver  to  Gokul -  Bangalore 560054
@@ -496,9 +497,79 @@ const HomeScreen = () => {
           width: '100%',
           height: 400
         }}>
-          <View>
-            <Text>Choose  your location </Text>
+          <View style={{ marginBottom: 8 }}>
+            <Text
+              style={{ fontSize: 16, fontWeight: "500" }}
+            >Choose  your location </Text>
+            <Text
+              style={{ marginTop: 5, fontSize: 16, color: "gray" }}
+            >Select a delivery location to see product availability and delivery options</Text>
+
           </View>
+
+          <ScrollView
+            horizontal showsHorizontalScrollIndicator={false}
+          >
+            {/* already added addresses */}
+
+            <Pressable style={{
+              width: 140,
+              height: 140,
+              borderColor: "#D0D0D0",
+              marginTop: 10,
+              borderWidth: 1,
+              padding: 1,
+              justifyContent: "center",
+              alignItems: "center",
+
+
+            }}>
+              <Text
+              style={{
+                textAlign:"center",
+                color:'#0066b2',
+                fontWeight:"500"
+              }}
+              >Add an address or  pick-up point</Text>
+            </Pressable>
+          </ScrollView>
+          <View 
+          style={{
+            flexDirection:"column",
+            gap:7,
+            marginBottom:30
+
+          }}
+          >
+            <View style={{flexDirection:"row",alignItems:'center',
+          gap:5
+          }}>
+            <Entypo name="location-pin" size={24} color="#0066b2" />
+            <Text style={{
+              color:'#0066b2',
+              fontWeight:"400"
+            }}>Enter an Indian Pincode</Text>
+            </View>
+            <View style={{flexDirection:"row",alignItems:'center',
+          gap:5
+          }}>
+            <Ionicons name="locate-sharp" size={24} color="#0066b2" />
+            <Text style={{
+              color:'#0066b2',
+              fontWeight:"400"
+            }}>Use my current location</Text>
+            </View>
+            <View style={{flexDirection:"row",alignItems:'center',
+          gap:5
+          }}>
+            <AntDesign name="earth" size={24} color="#0066b2" />
+            <Text style={{
+              color:'#0066b2',
+              fontWeight:"400"
+            }}>Deliver outside India</Text>
+            </View>
+          </View>
+
         </ModalContent>
 
       </BottomModal>
