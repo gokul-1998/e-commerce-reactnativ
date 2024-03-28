@@ -199,7 +199,8 @@ const HomeScreen = () => {
   const [addresses, setAddresses] = useState([]);
   const [category, setCategory] = useState("jewelery");
   const {userId,setUserId}=useContext(UserType);
-
+  const [selectedaddress, setSelectedAddress] = useState('');
+  console.log(selectedaddress)
   const [items, setItems] = useState([
     { label: "Men's clothing", value: "men's clothing" },
     { label: "jewelery", value: "jewelery" },
@@ -264,9 +265,7 @@ const HomeScreen = () => {
     };
     fetchUser();
 }, []);
-  console.log(cart)
-  console.log("aaaaaaaaaaaaaaaaaa")
-  console.log("addresses",addresses)
+  
 
   // console.log("products", products);
 
@@ -550,6 +549,7 @@ const HomeScreen = () => {
             {/* already added addresses */}
             {addresses.map((item,index)=>(
               <Pressable 
+              onPress={()=>setSelectedAddress(item)}
               style={{
                 width: 140,
                 height: 140,
@@ -561,7 +561,7 @@ const HomeScreen = () => {
                 gap:3,
                 marginRight:15,
                 marginTop:10,
-
+                backgroundColor:selectedaddress===item?"#FBCEB1":"white"
               }}
               >
                 <View style={{
