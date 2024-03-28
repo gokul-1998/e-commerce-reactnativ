@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwt_decode from 'jwt-decode';
+const jwt_decode = require('jwt-decode');
 import { UserType } from '../UserContext';
 
 
@@ -12,12 +12,16 @@ const AddressScreen = () => {
     const [street, setStreet] = useState("");
     const [landmark, setLandmark] = useState("");
     const [postalCode, setPostalCode] = useState("");
-    const [userId,setUserId]=useContext(UserType);
+    const {userId,setUserId}=useContext(UserType);
 
     useEffect(() => {
         const fetchUser=async()=>{
-            const user=await AsyncStorage.getItem("authToken");
+            console.log("inside fetch user")
+            const token=await AsyncStorage.getItem("authToken");
+            console.log(token)
             const decodedToken=jwt_decode(token);
+            console.log(decodedToken)
+            console.log("afte decde a")
             const  userId=decodedToken.userId;
             setUserId(userId);
             
@@ -27,7 +31,7 @@ const AddressScreen = () => {
 console.log(userId);
 
     const handleAddAddress=()=>{
-        
+
     }
 
     return (
