@@ -375,6 +375,7 @@ const HomeScreen = () => {
           <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
             {deals.map((item, index) => (
               <Pressable
+              key={index}
                 onPress={() => navigation.navigate("Info", {
                   id: item.id,
                   title: item.title,
@@ -423,6 +424,7 @@ const HomeScreen = () => {
           >
             {offers.map((item, index) => (
               <Pressable
+              key={index}
                 onPress={() =>
                   navigation.navigate("Info", {
                     id: item.id,
@@ -556,6 +558,7 @@ const HomeScreen = () => {
             {/* already added addresses */}
             {addresses.map((item,index)=>(
               <Pressable 
+              key={index}
               onPress={()=>setSelectedAddress(item)}
               style={{
                 width: 140,
