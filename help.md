@@ -1,0 +1,3 @@
+- if you face jwt_decode error
+    - ![alt text](image.png)
+    - https://github.com/auth0/jwt-decode/issues/241

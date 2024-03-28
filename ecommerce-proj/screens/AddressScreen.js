@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const jwt_decode = require('jwt-decode');
 import { UserType } from '../UserContext';
 
+import jwtDecode from 'jwt-decode';
 
 const AddressScreen = () => {
     const [name, setName] = useState("");
@@ -15,20 +15,22 @@ const AddressScreen = () => {
     const {userId,setUserId}=useContext(UserType);
 
     useEffect(() => {
-        const fetchUser=async()=>{
-            console.log("inside fetch user")
-            const token=await AsyncStorage.getItem("authToken");
-            console.log(token)
-            const decodedToken=jwt_decode(token);
-            console.log(decodedToken)
-            console.log("afte decde a")
-            const  userId=decodedToken.userId;
-            setUserId(userId);
-            
-    }
-    fetchUser();
-},[]);
-console.log(userId);
+        const fetchUser = async () => {
+            try {
+                console.log("inside fetch user");
+                const token = await AsyncStorage.getItem("authToken");
+                console.log(token);
+                const decodedToken=jwtDecode(token);                              console.log(decodedToken);
+                console.log("after decode");
+                const userId = decodedToken.userId;
+                setUserId(userId);
+            } catch (error) {
+                console.error("Error fetching user:", error);
+            }
+        };
+        fetchUser();
+    }, []);
+    console.log(userId);
 
     const handleAddAddress=()=>{
 

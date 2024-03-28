@@ -26,3 +26,20 @@
 
 - `npx expo install @react-native-async-storage/async-storage`
     - this is used to store data in the local storage of the device 
+
+- `yarn add react-native-image-slider-box`
+    - this is used to create a slider for the images
+
+- https://fakestoreapi.com/docs
+    - this is the api that is used to get the data for the products
+
+- `yarn add  react-native-dropdown-picker`
+    - this is used to create a dropdown picker
+
+- `yarn add react-redux`
+
+- to add @reduxjs/toolkit
+    - `yarn add @reduxjs/toolkit`
+
+- `yarn add react-native-modals`
+- `yarn add jwt-decode`
