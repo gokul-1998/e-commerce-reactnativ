@@ -13,6 +13,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import ProductInfoScreen from '../screens/ProductInfoScreen';
 import AddAddressScreen from '../screens/AddAddressScreen';
 import AddressScreen from '../screens/AddressScreen';
+import CartScreen from '../screens/CartScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 
 const StackNavigator = () => {
@@ -39,7 +41,7 @@ const StackNavigator = () => {
           }
           
           />
-          <Tab.Screen name="Profile" component={HomeScreen}
+          <Tab.Screen name="Profile" component={ProfileScreen}
           options={{
             tabBarLabel: 'Profile',
             tabBarLabelStyle:{color:"#008E97"},
@@ -56,7 +58,7 @@ const StackNavigator = () => {
           }
           
           />
-          <Tab.Screen name="Cart" component={HomeScreen}
+          <Tab.Screen name="Cart" component={CartScreen}
           options={{
             tabBarLabel: 'Cart',
             tabBarLabelStyle:{color:"#008E97"},
