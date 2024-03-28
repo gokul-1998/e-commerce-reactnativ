@@ -309,14 +309,21 @@ const HomeScreen = () => {
             style={{ flexDirection: "row", alignItems: "center", gap: 5, padding: 10, backgroundColor: "#AFEEEE" }}>
             <Ionicons name="location-outline" size={24} color="black" />
             <Pressable
+            // this on press he missed while doing it in the video, but he asked us to add
               onPress={
 
                 () => setModalVisible(!modalVisible)
-              }
+              } 
             >
-              <Text style={{ fontSize: 13, fontWeight: "500" }}>
-                Deliver  to  Gokul -  Bangalore 560054
-              </Text>
+              {selectedaddress ? (
+                <Text>
+                  Deliver to {selectedaddress?.name} - {selectedaddress?.street}
+                </Text>
+              ) : (
+                <Text style={{ fontSize: 13, fontWeight: "500" }}>
+                    Add a Address
+                </Text>
+              )}
             </Pressable>
 
             <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
