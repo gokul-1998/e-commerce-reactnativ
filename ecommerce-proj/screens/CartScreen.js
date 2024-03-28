@@ -80,30 +80,152 @@ const CartScreen = () => {
             </Pressable>
 
             <Text style={{
-                height:1,
-                borderColor:"#D0D0D0",
-                borderWidth:1,
-                marginTop:16,
-            }}/>
+                height: 1,
+                borderColor: "#D0D0D0",
+                borderWidth: 1,
+                marginTop: 16,
+            }} />
 
-            <View style={{marginHorizontal:10}}>
-                {cart?.map((item,index)=>(
-                     <View key={index}> 
-                        <Pressable>
+            <View style={{ marginHorizontal: 10 }}>
+                {cart?.map((item, index) => (
+                    <View
+                        style={{
+                            backgroundColor: "white",
+                            marginVertical: 10,
+                            borderBottomColor: "#F0F0F0",
+                            borderWidth: 2,
+                            borderTopWidth: 0,
+                            borderRightWidth: 0,
+                            borderLeftWidth: 0,
+
+                        }}
+
+                        key={index}>
+                        <Pressable style={{
+                            marginVertical: 10,
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+
+
+                        }}>
                             <View>
-                                <Text>aas</Text>
                                 <Image style={{
-                                    width:140 ,
-                                    height:140,
-                                    resizeMode:"contain",
-                                }} source={{uri:item?.image}}/>
+                                    width: 140,
+                                    height: 140,
+                                    resizeMode: "contain",
+                                }} source={{ uri: item?.image }} />
 
-                                
+
+                            </View>
+
+                            <View>
+                                <Text
+                                    numberOfLines={3}
+                                    style={{
+                                        width: 150,
+                                        marginTop: 10,
+                                    }}>{item?.title} </Text>
+
+                                <Text style={{
+                                    fontWeight: "bold",
+                                    fontSize: 18,
+                                    marginTop: 10,
+                                }}>{item?.price}</Text>
+                                <Image
+                                    style={{ width: 30, height: 30, resizeMode: "contain" }}
+                                    source={{
+                                        uri: "https://assets.stickpng.com/thumbs/5f4924cc68ecc70004ae7065.png",
+                                    }}
+                                />
+                                <Text style={{ color: "green" }}>In Stock</Text>
+                                {/* <Text style={{ fontWeight: "500", marginTop: 6 }}>
+                  {item?.rating?.rate} ratings
+                </Text> */}
+
                             </View>
                         </Pressable>
-                        </View>
+                        <Pressable style={{
+                            marginTop: 15,
+                            marginBottom: 10,
+                            flexDirection:"row",
+                            alignItems:"center",
+                            gap:10
+                        }}>
+                            <View style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                paddingHorizontal: 10,
+                                paddingVertical: 5,
+                                borderRadius: 7
+                            }}>
+                                <Pressable style={{
+                                    backgroundColor: "#D8D8D8",
+                                    padding: 7,
+                                    borderTopLeftRadius: 6,
+                                    borderBottomLeftRadius: 6
+
+                                }}>
+                                    <AntDesign name="delete" size={24} color="black" />
+                                </Pressable>
+                                <Pressable style={{
+                                    backgroundColor: "white",
+                                    paddingHorizontal: 18,
+                                    paddingVertical: 6
+                                }}>
+                                    <Text>{item?.quantity}</Text>
+                                </Pressable>
+                                <Pressable style={{
+                                    backgroundColor: "#D8D8D8",
+                                    padding: 7,
+                                    borderTopLeftRadius: 6,
+                                    borderBottomLeftRadius: 6
+
+                                }}>
+                                    <Feather name="plus" size={24} color="black" />
+                                </Pressable>
+                            </View>
+                            <Pressable style={{
+                                backgroundColor:" white",
+                                paddingHorizontal:8,
+                                paddingVertical:10,
+                                borderRadius:5,
+                                borderWidth:0.5,
+                                borderColor:"#C0C0C0"
+                            }}>
+                                <Text>Delete</Text>
+                            </Pressable>
+                        </Pressable>
+                        <Pressable style={{
+                            flexDirection:"row",
+                            alignItems:"center",
+                            gap:10
+                        }}>
+                           <Pressable style={{
+                                backgroundColor:" white",
+                                marginBottom:15,
+                                paddingHorizontal:8,
+                                paddingVertical:10,
+                                borderRadius:5,
+                                borderWidth:0.5,
+                                borderColor:"#C0C0C0"
+                            }}> 
+                            <Text>save for later</Text>
+                            </Pressable> 
+                            <Pressable style={{
+                                backgroundColor:" white",
+                                paddingHorizontal:8,
+                                paddingVertical:10,
+                                borderRadius:5,
+                                borderWidth:0.5,
+                                borderColor:"#C0C0C0"
+                            }} >
+                            <Text>See more like this</Text>
+                            </Pressable> 
+                        </Pressable>
+
+                    </View>
                 ))}
-                </View>
+            </View>
 
         </ScrollView>
     )
