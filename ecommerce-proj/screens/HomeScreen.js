@@ -13,6 +13,7 @@ import { SliderBox } from 'react-native-image-slider-box';
 import ProductItem from '../components/ProductItem';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const HomeScreen = () => {
   const list = [
@@ -221,7 +222,12 @@ const HomeScreen = () => {
     setCompanyOpen(false);
   },[]);
 
-  console.log("products", products);
+  const cart=useSelector((state)=>state.cart.cart);
+  console.log(cart)
+  console.log("aaaaaaaaaaaaaaaaaa")
+
+
+  // console.log("products", products);
 
   return (
     <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? 40 : 0, flex: 1, backgroundColor: "white" }}>

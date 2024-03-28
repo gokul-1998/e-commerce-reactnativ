@@ -5,13 +5,27 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../redux/CartReducer';
 
 const ProductInfoScreen = () => {
 
   const route = useRoute();
   const { width } = Dimensions.get("window");
   const navigation = useNavigation();
+  const [addedToCart, setAddedToCart] = React.useState(false);
   const height = (width * 100) / 100;
+  const dispatch=useDispatch();
+  const addItemToCart=  (item)=>{
+    setAddedToCart(true);
+    dispatch(addToCart(item));
+    setTimeout(()=>{
+      setAddedToCart(false);
+    },60000)
+  }
+  const cart=useSelector((state)=>state.cart.cart);
+  console.log(cart )
+
 
   return (
     <ScrollView style={{
@@ -233,11 +247,19 @@ const ProductInfoScreen = () => {
         >In stock</Text>
 
     <Pressable
+    onPress={()=>addItemToCart(route.params?.item)}
     style={{backgroundColor:"#FFC72C",padding:10,borderRadius:20,justifyContent:"center",
     alignItems:"center",marginHorizontal:10,marginVertical:10
   }}
     >
+      {addedToCart?(
+      <View>
+        <Text>Added to Cart </Text>
+      </View>
+      ):(
       <Text>Add to Cart</Text>
+      )}
+     
     </Pressable>
 
     <Pressable
