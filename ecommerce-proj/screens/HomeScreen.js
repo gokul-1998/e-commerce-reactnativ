@@ -512,7 +512,15 @@ const HomeScreen = () => {
           >
             {/* already added addresses */}
 
-            <Pressable style={{
+            <Pressable 
+            onPress={
+              ()=>{
+                setModalVisible(false);
+                navigation.navigate("Address");
+
+              }
+            }
+            style={{
               width: 140,
               height: 140,
               borderColor: "#D0D0D0",
