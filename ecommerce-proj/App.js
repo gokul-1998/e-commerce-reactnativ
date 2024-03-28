@@ -7,6 +7,7 @@ import store from './store';
 
 import axios from 'axios';
 import { ModalPortal } from 'react-native-modals';
+import { UserContext } from './UserContext';
 
 // to use axios base url
 
@@ -15,11 +16,14 @@ axios.defaults.baseURL = 'http://192.168.21.57:8000';
 export default function App() {
   return (
     <>
-    <Provider store={store}>
+      <Provider store={store}>
+        <UserContext>
 
-    <StackNavigator />
-    <ModalPortal/>
-    </Provider>
+
+          <StackNavigator />
+          <ModalPortal />
+        </UserContext>
+      </Provider>
     </>
   );
 }

@@ -1,5 +1,9 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from 'jwt-decode';
+import { UserType } from '../UserContext';
+
 
 const AddressScreen = () => {
     const [name, setName] = useState("");
@@ -8,6 +12,24 @@ const AddressScreen = () => {
     const [street, setStreet] = useState("");
     const [landmark, setLandmark] = useState("");
     const [postalCode, setPostalCode] = useState("");
+    const [userId,setUserId]=useContext(UserType);
+
+    useEffect(() => {
+        const fetchUser=async()=>{
+            const user=await AsyncStorage.getItem("authToken");
+            const decodedToken=jwt_decode(token);
+            const  userId=decodedToken.userId;
+            setUserId(userId);
+            
+    }
+    fetchUser();
+},[]);
+console.log(userId);
+
+    const handleAddAddress=()=>{
+        
+    }
+
     return (
         <ScrollView
             style={{ marginTop: 50, }}
@@ -142,6 +164,7 @@ const AddressScreen = () => {
                 </View>
 
                 <Pressable
+                onPress={handleAddAddress}
                     style={{
                         backgroundColor: "#FFC72C", padding: 19, borderRadius: 6,
                         justifyContent: "center", marginTop: "20", alignItems: "center"
