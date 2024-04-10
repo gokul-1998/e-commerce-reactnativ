@@ -75,7 +75,7 @@ const CartScreen = () => {
 
                 }}>
                 <Text>
-                    Proceed to Checkout ({cart.length}) items
+                    Proceed to Chechkout ({cart.length}) items
                 </Text>
             </Pressable>
 

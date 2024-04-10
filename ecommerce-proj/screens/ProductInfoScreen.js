@@ -242,7 +242,7 @@ const ProductInfoScreen = () => {
       <Text style={{color:"green",
       
       marginHorizontal:10,
-          fontWeight:"540"
+          fontWeight:"500"
     }}
         >In stock</Text>
 
